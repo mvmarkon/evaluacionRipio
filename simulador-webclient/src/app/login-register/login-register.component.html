@@ -1,0 +1,12 @@
+<h1>{{login ? 'Login' : 'Register'}} </h1>
+<input [(ngModel)]="register.username" placeholder="username"><br>
+<input [(ngModel)]="register.password" placeholder="password" type="password"><br>
+<input *ngIf="!login" [(ngModel)]="register.email" placeholder="email"><br>
+<div *ngIf="!login">
+  <button (click)="registerUser()">Register User</button>
+  <a (click)="login = !login">Cancel</a>
+</div>
+<div *ngIf="login">
+  <button (click)="loginUser()">Login User</button>
+  <a (click)="login = !login">Register</a>
+</div>
