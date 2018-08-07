@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { UserService } from './services/user.service';
 import { TokenInjectionService } from './services/token-injection.service';
+import { OperationService } from './services/operation.service';
+import { AccountService } from './services/account.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { TokenInjectionService } from './services/token-injection.service';
   providers: [
     AuthGuardService,
     UserService,
+    OperationService,
+    AccountService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInjectionService,

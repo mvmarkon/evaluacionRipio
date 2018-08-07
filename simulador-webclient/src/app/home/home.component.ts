@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-home',
@@ -7,16 +8,20 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  users;
+  accounts;
+  currentAccount;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private accountService: AccountService
   ) { }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(
-      users => this.users = users
-    );
+    this.accountService.getAccounts().subscribe( acs => {
+      if (acs) {
+        this.currentAccount = (acs.filter(ac => ac.owner === localStorage.getItem('currentUser')['id']));
+        this.accounts = acs.splice(acs.indexOf(this.currentAccount), 1);
+      }
+    });
   }
-
 }
